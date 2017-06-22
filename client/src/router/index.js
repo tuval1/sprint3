@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import HomePage from '@/pages/HomePage'
-import emailApp from '@/pages/emailApp'
-import booksApp from '@/pages/booksApp'
-import placesApp from '@/pages/placesApp'
+import emailApp from '@/components/emailApp/emailsList'
+import booksApp from '@/components/booksApp/booksApp'
+import placesApp from '@/components/placesApp/placesApp'
 
 Vue.use(Router)
 

@@ -5,9 +5,7 @@
   </div>
   <div class="page">
     <router-view></router-view>
-    <div class="help-text">
-      <p>Vue.js 2 Single Page App (SPA) Example with vuex and vue-router.</p>
-      <a href="https://github.com/skyronic/vue-spa">View Source Code</a>
+    <!--<div class="help-text">-->
     </div>
   </div>
 </div>

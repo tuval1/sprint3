@@ -1,5 +1,15 @@
 <template>
+    <div class="message">
+        <div class="header">
+            
+            <ul>
+            <li><span class="prop">From: </span>{{email.from}}</li>
+            <li><span class="prop">To: </span>{{email.to}}</li>
+            <li><span class="prop">Received on: </span>{{email.date}}</li>
+            </ul>
+            </div>
   <p>{{email.msg}}</p>
+  </div>
 </template>
 
 <script>
@@ -16,10 +26,10 @@ export default {
   created() {    
   },
   methods: {
-    closeMe() {
-      if (this.isModalMode) this.$emit('close');
-      else this.$router.push('/');
-    },
+      deleteEmail(){
+        console.log('request delete');
+        this.$emit('delete');
+      },    
     requestNextBook() {
       console.log('Requesting Next');
       if (this.isModalMode) this.$emit('next');

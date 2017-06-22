@@ -1,12 +1,10 @@
 <template>
-    <tr>        
+    <tr v-bind:class="{unread: !email.read}">        
         <td>{{email.subject}}</td>
         <td>{{email.from}}</td> 
-
         <td>{{email.date}}</td>
         <td>{{email.read}}</td>
-
-
+        <td><button @click.stop="deleteEmail">X</button></td>
     </tr>
 </template>
 
@@ -19,7 +17,7 @@ export default {
             console.log('Request Edit');
             this.$emit('edit');
         },
-        deleteBook() {
+        deleteEmail(email) {
             console.log('Request Delete');
             this.$emit('delete');
         },
@@ -37,6 +35,9 @@ export default {
 <style>
 table, td {
     padding: 5px;
+}
+.unread {
+    font-weight:bold;
 }
 
 </style>

@@ -24,9 +24,9 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .cart {
-  width: 600px;
+  width: 80%;
 }
 
 .checkout-table {

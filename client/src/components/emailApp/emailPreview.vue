@@ -2,7 +2,6 @@
     <tr>        
         <td>{{email.subject}}</td>
         <td>{{email.from}}</td> 
-        <td>{{email.date}}</td>
     </tr>
 </template>
 

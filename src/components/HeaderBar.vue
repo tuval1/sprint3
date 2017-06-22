@@ -1,6 +1,9 @@
 <template>
   <div class="menu-links">
     <router-link to="/">Home</router-link>
+    <router-link to="/placesApp">my places</router-link>
+    <router-link to="/booksApp">my book store</router-link>
+    <router-link to="/emailApp">email</router-link>
     <router-link to="/cart">Cart ({{ cartCount }})</router-link>
   </div>
 </template>

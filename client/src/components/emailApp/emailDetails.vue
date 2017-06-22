@@ -1,5 +1,5 @@
 <template>
-  
+  <p>{{email.msg}}</p>
 </template>
 
 <script>
@@ -10,17 +10,10 @@ export default {
   props: ['email'],
   data() {
     return {
-      bookToShow: null,
-      isModalMode: this.book !== undefined
+      
     }
   },
-  created() {
-    const bookId = +this.$route.params.bookId;
-    if (bookId) {
-      this.getBook(bookId);
-    } else {
-      this.bookToShow = this.book;
-    }
+  created() {    
   },
   methods: {
     closeMe() {

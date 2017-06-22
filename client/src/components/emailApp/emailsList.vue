@@ -3,7 +3,17 @@
     <button @click="getEmails">Next > </button>
     <h2>num of mails: {{emails.length}}</h2>    
     <table>
+
+      <tr>
+      <th>Subject</th>
+      <th>Form</th>
+      <th>Date</th>
+      <th>read</th>
+        </tr>
+      <email-preview v-for="email in emailsToShow" @click.native="selectEmail(email)"
+
       <email-preview v-for="email in emails" @click.native="selectEmail(email)"
+
       :email="email">
 
       </email-preview>
@@ -30,6 +40,7 @@ export default {
   },
   data() {
     return {
+      selectedEmail: null,
       emails: null,
       selectedEmail: null
     }
@@ -47,6 +58,7 @@ export default {
     },
     selectEmail(email) {
       this.selectedEmail = email;
+      email.read = true;
       console.log('selected email:',this.selectedEmail);
     },
     resetSelected() {

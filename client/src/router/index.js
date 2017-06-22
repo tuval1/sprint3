@@ -6,7 +6,7 @@ import booksApp from '@/components/booksApp/booksApp'
 import placesApp from '@/components/placesApp/placesApp'
 
 Vue.use(Router)
-
+/*eslint-disable*/
 export default new Router({
   routes: [
     {

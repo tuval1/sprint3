@@ -3,6 +3,7 @@
         <td>{{email.subject}}</td>
         <td>{{email.from}}</td> 
         <td>{{email.date}}</td>
+        <td>{{email.read}}</td>
     </tr>
 </template>
 

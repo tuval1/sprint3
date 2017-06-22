@@ -1,37 +1,34 @@
 <template>
-  <div class="cart">emailApp
+  <div class="cart">
+    emailApp
+    <button @click="getEmails">Next > </button>
   </div>
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
-  export default {
-    computed: {
-      ...mapGetters({
-        products: 'cartProducts'
-      }),
-      checkoutStatus () {
-        return this.$store.state.cart.lastCheckout
-      },
-      total () {
-        return this.products.reduce((total, p) => {
-          return total + p.price * p.quantity
-        }, 0)
-      }
-    },
-    methods: {
-      ...mapActions([
-        'checkout'
-      ])
+/*eslint-disable */
+
+import emailService from '../services/emailService'
+export default {
+  data() {
+    return {emails: []
+    }
+  },
+  methods: {
+    getEmails() {
+      var emails;
+      emailService.getEmails('requestEmails')
+        .then(res => { this.emails = res; console.log(this.emails) })
     }
   }
+}
 </script>
 
 <style>
-
 .cart {
   width: 600px;
 }
+
 .checkout-table {
   width: 100%;
 }

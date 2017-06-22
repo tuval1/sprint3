@@ -27,10 +27,10 @@
   }
 </script>
 
-<style>
+<style scoped>
 
 .cart {
-  width: 600px;
+  width: 90%;
 }
 .checkout-table {
   width: 100%;

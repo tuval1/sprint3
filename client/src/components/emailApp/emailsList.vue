@@ -1,8 +1,7 @@
 <template>
   <section v-if="emails">
-    
+    <button @click="getEmails">Next > </button>
     <h2>num of mails: {{emails.length}}</h2>    
-    <button>Compose mail</button>
     <table>
 
       <tr>
@@ -11,8 +10,12 @@
       <th>Date</th>
       <th>read</th>
         </tr>
+      <email-preview v-for="email in emailsToShow" @click.native="selectEmail(email)"
+
       <email-preview v-for="email in emails" @click.native="selectEmail(email)"
-      :email="email" @delete="deleteEmail(email)">
+
+      :email="email">
+
       </email-preview>
     </table>
 
@@ -28,27 +31,30 @@ import emailDetails from './emailDetails'
 export default {
   name: 'email-list',
   created() {    
-    this.emails = emailService.getEmails('requestEmails')
-          .then(res => { this.emails = res; console.log(this.emails) })    
+    this.emails = []
+    //this.emails;
   },
   components: {
     emailPreview,
     emailDetails
-  },  
+  },
   data() {
     return {
       selectedEmail: null,
-      emails: null     
+      emails: null,
+      selectedEmail: null
     }
   },
   computed: {
     emailsToShow() {
-      return this.emails          
+      return this.emails
+          // this.emails= getEmails()
     }
   },
   methods: {
-    deleteEmail(email){
-      console.log('deleting email',email);
+    getEmails() {
+          emailService.getEmails('requestEmails')
+          .then(res => { this.emails = res; console.log(this.emails) })
     },
     selectEmail(email) {
       this.selectedEmail = email;

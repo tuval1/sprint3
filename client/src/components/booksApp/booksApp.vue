@@ -13,12 +13,18 @@
 
 
   export default {
-    components:{BookList,cart},
+    components:{
+              BookList,
+              cart
+            },
     computed: {
 
     },
+    data(){
+            isCreateMode: false
+    },
     methods: {
-
+      
     }
   }
 </script>

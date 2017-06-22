@@ -11,9 +11,9 @@ const port = 3000
 
 
 const emails =  [
-	{id:1, from:'yos111@vs.com',to:'yos1@ggv.com',subject:'hy',msg:'how are you?',read: false},
-	{id:3, from:'yos33@vs.com',to:'yos3@ggv.com',subject:'hy',msg:'how are you?',read: false},
-	{id:2, from:'yos1111@vs.com',to:'yos@ggv.com',subject:'re: hy',msg:'fine thanks',read: false}
+	{id:1, from:'yos111@vs.com',to:'yos1@ggv.com',subject:'hy',msg:'how are you?'},
+	{id:3, from:'yos33@vs.com',to:'yos3@ggv.com',subject:'hy',msg:'how are you?'},
+	{id:2, from:'yos1111@vs.com',to:'yos@ggv.com',subject:'re: hy',msg:'fine thanks'}
 							];
 
 

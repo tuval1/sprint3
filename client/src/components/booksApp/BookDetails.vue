@@ -31,7 +31,9 @@
    .book-details{
     background: gold;
    }
-    /*.popup {
+    .popup {
+    position:fixed;
+    
     background: gold;
     padding: 10px;
     border-radius: 1em;
@@ -39,7 +41,7 @@
     position: absolute;
     left: 0;
     top: 50%;
-}*/
+}
 
 
 </style>

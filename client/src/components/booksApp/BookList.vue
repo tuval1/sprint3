@@ -1,8 +1,13 @@
  <template>
     <section v-if="books">
-        <book-filter @set-filter="setFilter"></book-filter>
-        <h2>We have {{books.length}} Books</h2>
-        <button @click="isCreateMode=true">+</button>
+        <header>
+            <h2>We have {{books.length}} Books</h2>
+            <div class= "pannel">
+                <book-filter @set-filter="setFilter"></book-filter>
+                <button class= "button-panel" @click="isCreateMode=true">add new book</button>
+            </div>
+        </header>
+        <div class="clear"></div>
         <ul>
             <book-preview v-for="currBook in booksToShow" :key="currBook.id" @click.native="selectBook(currBook)" @edit="editBook(currBook)" @delete="deleteBook(currBook)" @add-to-cart="addToCart(currBook)" :book="currBook">
             </book-preview>
@@ -99,13 +104,23 @@ export default {
 }
 </script>
 <style scoped>
-
+header{
+    border:1px solid green;
+}
+.clear{
+    clear:both;
+}
+.pannel{
+    border:1px solid red;
+    display: table;
+    width: 100%;
+}
 .cart{
     width:90%;
     border:1px solid red;
 }
 section{
-    width:90%;
+    /*width:90%;*/
     border:1px solid blue;
 }
 section ul{
@@ -114,7 +129,11 @@ section ul{
     justify-content: center;
     flex-wrap: wrap;
 }
-
-
+.button-panel{
+    float:right;
+}
+book-filter{
+    width:50%;
+}
 
 </style>

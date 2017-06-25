@@ -8,7 +8,7 @@
                 <h1 v-else>New Book</h1>
 
                 <span class = "title">title <input type="text" v-model="bookToEdit.title" />             </span>
-                <span class = "id">id:<input type="text" v-model="bookToEdit.id" />                 </span>
+                <span class = "id">id:<input type="text" v-model="bookToEdit.id" disabled/>                 </span>
                 <span class = "price">$<input type="text" v-model="bookToEdit.price" />             </span>
                 <span class = "description"><textarea rows="10" cols="50" 
                                 v-model="bookToEdit.description" />  </textarea></span>

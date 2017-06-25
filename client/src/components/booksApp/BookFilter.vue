@@ -1,10 +1,10 @@
     
     
     <template> 
-        <section class="book-filter">
-            <h2>Books Filter</h2>
+        <div class="book-filter">
+            <span>Books Filter</span>
             <input type="text" v-model="bookFilter.byText" placeholder="Filter By Name" >
-        </section>
+        </div>
     </template> 
 
 
@@ -33,9 +33,10 @@ name:'book-filter',
 </script>
 <style>
     .book-filter {
-    background-color: chocolate;
+    /*background-color: chocolate;*/
     padding: 10px;
-    border-radius: 1em;
+    width:50%;
+    float:left;
 }
 
 </style>

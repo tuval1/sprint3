@@ -1,29 +1,33 @@
 <template>
   <div class="cart">placesApp
+      <map-board :markers="markers" :center="center"></map-board>
+
   </div>
 </template>
 
 <script>
-  import { mapActions, mapGetters } from 'vuex'
+  import Vue from 'vue'
+  import mapBoard from './mapBoard'
+import mapService from '../../services/map.service';
+  
   export default {
-    computed: {
-      ...mapGetters({
-        products: 'cartProducts'
-      }),
-      checkoutStatus () {
-        return this.$store.state.cart.lastCheckout
-      },
-      total () {
-        return this.products.reduce((total, p) => {
-          return total + p.price * p.quantity
-        }, 0)
-      }
+    
+    components: {
+        mapBoard
     },
-    methods: {
-      ...mapActions([
-        'checkout'
-      ])
-    }
+    
+    created() {
+          this.markers= mapService.getMarkers();
+          this.center= mapService.getCenter();
+          
+    },
+    data() {
+        return {
+            markers: []
+            ,
+            location:{},
+        }
+    },
   }
 </script>
 

@@ -1,17 +1,27 @@
  <template>
     <section v-if="books">
-        <book-filter @set-filter="setFilter"></book-filter>
-        <h2>We have {{books.length}} Books</h2>
-        <button @click="isCreateMode=true">+</button>
+        <header>
+            <h2>We have {{books.length}} Books</h2>
+            <div class= "pannel">
+                <book-filter @set-filter="setFilter"></book-filter>
+                <button class= "button-panel" @click="createNew">add new book</button>
+            </div>
+        </header>
+        <div class="clear"></div>
         <ul>
-            <book-preview v-for="currBook in booksToShow" :key="currBook.id" @click.native="selectBook(currBook)" @edit="editBook(currBook)" @delete="deleteBook(currBook)" @add-to-cart="addToCart(currBook)" :book="currBook">
+            <book-preview v-for="currBook in booksToShow" :key="currBook.id"
+                         @click.native="selectBook(currBook)" @edit="editBook(currBook)"
+                          @delete="deleteBook(currBook)" @add-to-cart="addToCart(currBook)"
+                           :book="currBook">
             </book-preview>
         </ul>
-        <book-details v-if="selectedBook" @close="resetSelected" @next="selectNext" :book="selectedBook">
+        <book-details v-if="(selectedBook || isEditMode) || isCreateMode" 
+            @close="resetSelected" @next="selectNext" @save="saveBook"
+            :book="selectedBook" :isCreateMode="isCreateMode" :isEditMode="isEditMode">
         </book-details>
     
-        <book-edit v-if="editedBook || isCreateMode" :book="editedBook" @save="saveBook">
-        </book-edit>
+        <!--<book-edit v-if="isEditMode || isCreateMode" :book="selectedBook" @save="saveBook">
+        </book-edit>-->
         
     
     </section>
@@ -19,6 +29,7 @@
 
 <script>
 import BookFilter from './BookFilter';
+import booksApp from './booksApp';
 import BookEdit from './BookEdit';
 import BookDetails from './BookDetails';
 import BookPreview from './BookPreview';
@@ -44,7 +55,8 @@ export default {
             books: null,
             selectedBook: null,
             editedBook: null,
-            isCreateMode: false,
+           isCreateMode: false,
+           isEditMode: false,
             bookFilter: null
         }
     },
@@ -62,23 +74,34 @@ export default {
         },
         resetSelected() {
             this.selectedBook = null;
+            this.isCreateMode = false;
+            this.isEditMode= false;
         },
         selectNext() {
             this.selectedBook = bookService.getNext(this.selectedBook);
         },
         editBook(book) {
             console.log('Editing the book', book)
-            this.editedBook = book;
+            this.selectedBook = book;
+            this.isEditMode = true;
+            console.log('edit mode', this.isEditMode)
+
         },
         deleteBook(book) {
             bookService.deleteBook(book);
         },
+        createNew() {
+            this.isCreateMode=true;
+            this.selectedBook = null;
+        },
         saveBook(book) {
+            console.log('saving 2: ', book);
+
             if(book){
                 bookService.saveBook(book);
             }
-            this.editedBook = null;
-            this.isCreateMode = false;
+            this.isEditMode = false;
+            this.resetSelected();
         },
         // cancelEditing() {
         //     this.editedBook = null;
@@ -98,13 +121,23 @@ export default {
 }
 </script>
 <style scoped>
-
+header{
+    border:1px solid green;
+}
+.clear{
+    clear:both;
+}
+.pannel{
+    border:1px solid red;
+    display: table;
+    width: 100%;
+}
 .cart{
     width:90%;
     border:1px solid red;
 }
 section{
-    width:90%;
+    /*width:90%;*/
     border:1px solid blue;
 }
 section ul{
@@ -113,7 +146,11 @@ section ul{
     justify-content: center;
     flex-wrap: wrap;
 }
-
-
+.button-panel{
+    float:right;
+}
+book-filter{
+    width:50%;
+}
 
 </style>

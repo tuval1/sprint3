@@ -7,11 +7,11 @@
                 <h1 v-if="book">Edit: {{book.title}}</h1>
                 <h1 v-else>New Book</h1>
 
-                <span class = "title">title <input type="text" v-model="bookToEdit.title" />             </span>
-                <span class = "id">id:<input type="text" v-model="bookToEdit.id" />                 </span>
-                <span class = "price">$<input type="text" v-model="bookToEdit.price" />             </span>
+                <span class = "title">title <input type="text" v-model="selectedBook.title" />   </span>
+                <span class = "id">id:<input type="text" v-model="selectedBook.id" disabled/>   </span>
+                <span class = "price">$<input type="text" v-model="selectedBook.price" /> </span>
                 <span class = "description"><textarea rows="10" cols="50" 
-                                v-model="bookToEdit.description" />  </textarea></span>
+                                v-model="selectedBook.description" />  </textarea></span>
                 
                 <button @click="save">Save</button>
                 <button @click="cancel">Cancel</button>
@@ -27,18 +27,13 @@
         props: ['book'],
         data(){
                 return {
-                    bookToEdit: null
+                    selectedBook: null
+                    
                 }
             },
         created(){
                 this.bookToEdit = Object.assign({}, this.book);
             },
-        // beforeUpdate(){
-        //         document.querySelector('.book-edit').classList.add('fade1');
-        //     },
-        // updated(){
-        //         document.querySelector('.book-edit').classList.remove('fade1');
-        //     },
          methods: {
                 
                 save() {

@@ -4,19 +4,24 @@
             <h2>We have {{books.length}} Books</h2>
             <div class= "pannel">
                 <book-filter @set-filter="setFilter"></book-filter>
-                <button class= "button-panel" @click="isCreateMode=true">add new book</button>
+                <button class= "button-panel" @click="createNew">add new book</button>
             </div>
         </header>
         <div class="clear"></div>
         <ul>
-            <book-preview v-for="currBook in booksToShow" :key="currBook.id" @click.native="selectBook(currBook)" @edit="editBook(currBook)" @delete="deleteBook(currBook)" @add-to-cart="addToCart(currBook)" :book="currBook">
+            <book-preview v-for="currBook in booksToShow" :key="currBook.id"
+                         @click.native="selectBook(currBook)" @edit="editBook(currBook)"
+                          @delete="deleteBook(currBook)" @add-to-cart="addToCart(currBook)"
+                           :book="currBook">
             </book-preview>
         </ul>
-        <book-details v-if="selectedBook" @close="resetSelected" @next="selectNext" :book="selectedBook">
+        <book-details v-if="(selectedBook || isEditMode) || isCreateMode" 
+            @close="resetSelected" @next="selectNext" @save="saveBook"
+            :book="selectedBook" :isCreateMode="isCreateMode" :isEditMode="isEditMode">
         </book-details>
     
-        <book-edit v-if="editedBook || isCreateMode" :book="editedBook" @save="saveBook">
-        </book-edit>
+        <!--<book-edit v-if="isEditMode || isCreateMode" :book="selectedBook" @save="saveBook">
+        </book-edit>-->
         
     
     </section>
@@ -51,6 +56,7 @@ export default {
             selectedBook: null,
             editedBook: null,
            isCreateMode: false,
+           isEditMode: false,
             bookFilter: null
         }
     },
@@ -68,23 +74,34 @@ export default {
         },
         resetSelected() {
             this.selectedBook = null;
+            this.isCreateMode = false;
+            this.isEditMode= false;
         },
         selectNext() {
             this.selectedBook = bookService.getNext(this.selectedBook);
         },
         editBook(book) {
             console.log('Editing the book', book)
-            this.editedBook = book;
+            this.selectedBook = book;
+            this.isEditMode = true;
+            console.log('edit mode', this.isEditMode)
+
         },
         deleteBook(book) {
             bookService.deleteBook(book);
         },
+        createNew() {
+            this.isCreateMode=true;
+            this.selectedBook = null;
+        },
         saveBook(book) {
+            console.log('saving 2: ', book);
+
             if(book){
                 bookService.saveBook(book);
             }
-            this.editedBook = null;
-            booksApp.isCreateMode = false;
+            this.isEditMode = false;
+            this.resetSelected();
         },
         // cancelEditing() {
         //     this.editedBook = null;

@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import HomePage from '@/pages/HomePage'
 import emailApp from '@/components/emailApp/emailsList'
 import booksApp from '@/components/booksApp/booksApp'
-import placesApp from '@/components/placesApp/placesApp'
+import mapApp from '@/components/mapApp/mapApp'
 
 Vue.use(Router)
 /*eslint-disable*/
@@ -25,9 +25,9 @@ export default new Router({
       component: emailApp
     },
     {
-      path: '/placesApp',
-      name: 'placesApp',
-      component: placesApp
+      path: '/mapApp',
+      name: 'mapApp',
+      component: mapApp
     }
   ]
 })

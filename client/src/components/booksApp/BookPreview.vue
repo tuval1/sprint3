@@ -23,7 +23,7 @@ export default {
     methods: {
         editBook() {
             console.log('Request Edit');
-            this.$emit('edit');
+            this.$emit('edit',this.book);
         },
         deleteBook() {
             console.log('Request Delete');

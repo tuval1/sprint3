@@ -11,6 +11,11 @@ import { sync } from 'vuex-router-sync'
 import $ from 'jquery';
 import VueResource from 'vue-resource';
 
+require('../node_modules/bootstrap/dist/css/bootstrap.css');
+
+
+
+
 sync(store, router)
 
 Vue.config.productionTip = false;

@@ -62,15 +62,7 @@ app.post('/user/:param', (request, response) => {
 
 })
 //==================================================================
-app.post('/emails/compose/:emailFrom/:emailTo', (request, response) => {  
-	var params1 = request.params.emailFrom;
-	
-	console.log(params1);
 
-	
-	response.end();
-  
-})
 //==================================================================
 
 //==================================================================

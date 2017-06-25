@@ -1,27 +1,40 @@
 <template>
-  <section v-if="emails">    
-    
+<div class="container">
+  <div class="row">
+  <section v-if="emails">   
+    <div class="col-md-6">
+      <div class="main-details">
     <h2>num of mails: {{emails.length}}</h2>    
-    <button @click="isComposeMode=!isComposeMode">Compose mail</button>
-    <table>
+      </div>
+      <div class="btn-compose">
+    <button @click.stop="isComposeMode=!isComposeMode" class="btn btn-primary">Compose mail</button>
+    </div>
+    <table class="table table-striped">
       <tr>
-      <th>id</th>
+      
       <th>sbj</th>
-      <th>to</th>
-      <th>read</th>
+      <th>from</th>
+      
       <th>message</th>
         </tr>
       
 
       <email-preview v-for="email in emails" @click.native="selectEmail(email)"
-      :email="email" @delete="deleteEmail"></email-preview>
+      :email="email" @delete="deleteEmail" v-if="showEmailList"></email-preview>
     </table>
+    
 <email-compose v-if="isComposeMode" :userEmail="userEmail" @compose="emailCompose">
       </email-compose>
-
+</div>
+<div class="col-md-6 message-container">
     <email-details v-if="selectedEmail" :email="selectedEmail">
-    </email-details>   
+    </email-details> 
+    </div>  
   </section>
+  </div>
+  </div>
+
+
 </template>
 
 <script>
@@ -30,6 +43,7 @@ import emailPreview from './emailPreview'
 import emailDetails from './emailDetails'
 import emailCompose from './emailCompose'
 import emailFilter from './emailFilter'
+
 export default {
   name: 'email-list',
   created() {
@@ -54,7 +68,8 @@ export default {
       selectedEmail: null,
       emails: null,
       isComposeMode: false,
-      filter: null
+      filter: null,
+      showEmailList: true
     }
   },
   computed: {    
@@ -80,7 +95,8 @@ export default {
     selectEmail(email) {
       this.selectedEmail = email;
       email.read = true;
-      console.log('selected email:',this.selectedEmail);
+      showEmailList = false;
+      
     },
     // emailFilter( str ){
     //   var txt = '';
@@ -92,11 +108,16 @@ export default {
     emailCompose(emailFrom,emailTo,emailSubject,emailMessage,sendDate){
       console.log('composing',emailFrom,emailTo,emailSubject,emailMessage,sendDate);
       var id = 10;
-      // this.emails.push(
-      //   {id: id++, from:emailFrom ,to:emailTo ,subject:emailSubject ,msg:emailMessage ,read: false}
-      // )
+      this.emails.push(
+        {id: id++, from:emailFrom ,to:emailTo ,subject:emailSubject ,msg:emailMessage ,read: false}
+      )
       emailService.composeEmail(emailFrom, emailTo);
-
+    },
+    showEmailList(){
+      showEmailList = true;
+    },
+    hideEmailList(){
+      showEmailList = false;
     }
     
   }
@@ -104,14 +125,13 @@ export default {
 </script>
 
 <style scoped>
-table{
-  border:1px solid blue;
+.message-container {
+  position:relative;
 }
-tr{
-  border:1px solid red;
+.btn-compose {
+  float:right;
 }
-email-details{
-  border:1px solid green;
+.main-details {
+  float:left;
 }
-
 </style>

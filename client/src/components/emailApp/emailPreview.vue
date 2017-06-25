@@ -1,10 +1,10 @@
 <template>
-    <tr>        
-        <td>{{email.id}}</td>
+    <tr v-bind:class="{unread: !email.read}">        
+        
         <td>{{email.subject}}</td>
         <td>{{email.from}}</td> 
-        <td>{{email.date}}</td>
-        <td>{{email.read}}</td>
+        
+        
         <td>{{email.msg}}</td> 
         <td><button @click.stop="deleteEmail">x</button></td> 
 
@@ -26,8 +26,8 @@ export default {
 </script>
 
 <style>
-table, td {
-    padding: 5px;
+.unread {
+    font-weight: bold;
 }
 
 </style>

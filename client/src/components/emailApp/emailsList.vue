@@ -1,16 +1,9 @@
 <template>
-<<<<<<< HEAD
-
   <section v-if="emails">    
-    <email-filter @filter="emailFilter"></email-filter>
-=======
-  <section v-if="emails">
-    <button @click="getEmails">Next > </button>
->>>>>>> 81b8fdde42febf1d0e69f24062a8aeff9de053e8
+    
     <h2>num of mails: {{emails.length}}</h2>    
     <button @click="isComposeMode=!isComposeMode">Compose mail</button>
     <table>
-
       <tr>
       <th>id</th>
       <th>sbj</th>
@@ -18,26 +11,16 @@
       <th>read</th>
       <th>message</th>
         </tr>
-      <email-preview v-for="email in emailsToShow" @click.native="selectEmail(email)"
-<<<<<<< HEAD
-      :email="email" @delete="deleteEmail(email)">
-=======
+      
 
       <email-preview v-for="email in emails" @click.native="selectEmail(email)"
-
-      :email="email">
-
->>>>>>> 81b8fdde42febf1d0e69f24062a8aeff9de053e8
-      </email-preview>
+      :email="email" @delete="deleteEmail"></email-preview>
     </table>
+<email-compose v-if="isComposeMode" :userEmail="userEmail" @compose="emailCompose">
+      </email-compose>
 
     <email-details v-if="selectedEmail" :email="selectedEmail">
-    </email-details>
-
-    <email-compose v-if="isComposeMode" :userEmail="userEmail" @compose="emailCompose">
-    </email-compose>
-
-    
+    </email-details>   
   </section>
 </template>
 
@@ -49,15 +32,14 @@ import emailCompose from './emailCompose'
 import emailFilter from './emailFilter'
 export default {
   name: 'email-list',
-  created() {    
-<<<<<<< HEAD
+  created() {
+
     this.emails = emailService.getEmails('requestEmails')
           .then(res => { this.emails = res; console.log('emails',this.emails) })
           
-=======
-    this.emails = []
+
     //this.emails;
->>>>>>> 81b8fdde42febf1d0e69f24062a8aeff9de053e8
+
   },
   components: {
     emailPreview,
@@ -67,35 +49,22 @@ export default {
   },  
   data() {
     return {
-<<<<<<< HEAD
+
       userEmail: 'owner@email.com',
       selectedEmail: null,
       emails: null,
       isComposeMode: false,
-      filter: null,
-      emailService: null   
-      
-      
+      filter: null
     }
   },
   computed: {    
     emailsToShow(){        
-      return this.emailFilter();
-=======
-      emails: null,
-      selectedEmail: null,
-      isComposeMode: false
+      //return this.emailFilter();
     }
   },
-  computed: {
-    emailsToShow() {
-      return this.emails
-          // this.emails= getEmails()
->>>>>>> 81b8fdde42febf1d0e69f24062a8aeff9de053e8
-    }
-  },  
+  
   methods: {
-<<<<<<< HEAD
+
     deleteEmail(email){
       console.log('deleting email',email);
       emailService.deleteEmail(email.id).then(res => this.emails = res);
@@ -103,26 +72,23 @@ export default {
 
       // var i = this.emails.indexOf(email);
       // this.emails.splice(i,1);
-      
-      
-=======
+    },
     getEmails() {
           emailService.getEmails('requestEmails')
           .then(res => { this.emails = res; console.log(this.emails) })
->>>>>>> 81b8fdde42febf1d0e69f24062a8aeff9de053e8
     },
     selectEmail(email) {
       this.selectedEmail = email;
       email.read = true;
       console.log('selected email:',this.selectedEmail);
     },
-    emailFilter( str ){
-      var txt = '';
-      console.log('Executing Filter',txt);          
-      return this.emails.filter(function( email ){
-        return email.subject.includes(txt) || email.from.includes(txt) || email.msg.includes(txt);
-      });
-    },
+    // emailFilter( str ){
+    //   var txt = '';
+    //   console.log('Executing Filter',txt);          
+    //   return this.emails.filter(function( email ){
+    //     return email.subject.includes(txt) || email.from.includes(txt) || email.msg.includes(txt);
+    //   });
+    // },
     emailCompose(emailFrom,emailTo,emailSubject,emailMessage,sendDate){
       console.log('composing',emailFrom,emailTo,emailSubject,emailMessage,sendDate);
       var id = 10;

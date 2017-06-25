@@ -6,6 +6,7 @@
         <td>{{email.date}}</td>
         <td>{{email.read}}</td>
         <td>{{email.msg}}</td> 
+        <td><button @click.stop="deleteEmail">x</button></td> 
 
     </tr>
 </template>
@@ -15,21 +16,11 @@ export default {
     name: 'email-preview',
     props: ['email'],
     methods: {
-        editBook() {
-            console.log('Request Edit');
-            this.$emit('edit');
+        deleteEmail() {
+            console.log('Request Delete',this.email);
+            this.$emit('delete',this.email);
         },
-        deleteBook() {
-            console.log('Request Delete');
-            this.$emit('delete');
-        },
-        addToCart() {
-            console.log('adding to cart');
-            this.$emit('addToCart');
-        },
-        substractFromCart() {
-            this.$emit('substractFromCart');
-        }
+       
     }
 }
 </script>

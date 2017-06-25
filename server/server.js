@@ -11,7 +11,7 @@ const port = 3000
 
 
 const emails =  [
-<<<<<<< HEAD
+
 	{id:1, from:'yos111@vs.com',to:'yos1@ggv.com',subject:'hy',msg:'how are you?',read: false},
 	{id:3, from:'yos33@vs.com',to:'yos3@ggv.com',subject:'hy',msg:'how are you?',read: false},
 	{id:2, from:'yos1111@vs.com',to:'yos@ggv.com',subject:'re: hy',msg:'fine thanks',read: false},
@@ -21,12 +21,7 @@ const emails =  [
 	{id:7, from:'yos111@vs.com',to:'yos1@ggv.com',subject:'hy',msg:'how are you?',read: false},
 	{id:8, from:'yos33@vs.com',to:'yos3@ggv.com',subject:'hy',msg:'how are you?',read: false},
 	{id:9, from:'yos1111@vs.com',to:'yos@ggv.com',subject:'re: hy',msg:'fine thanks',read: false}
-=======
-	{id:1, from:'yos111@vs.com',to:'yos1@ggv.com',subject:'hy',msg:'how are you?',read:false},
-	{id:3, from:'yos33@vs.com',to:'yos3@ggv.com',subject:'hy',msg:'how are you?',read:false},
-	{id:2, from:'yos1111@vs.com',to:'yos@ggv.com',subject:'re: hy',msg:'fine thanks',read:false}
->>>>>>> 81b8fdde42febf1d0e69f24062a8aeff9de053e8
-							];
+];
 
 
 
@@ -67,13 +62,13 @@ app.post('/user/:param', (request, response) => {
 
 })
 //==================================================================
-app.post('/emails/compose', (request, response) => {  
-	//var params1 = request.params.item;
-	  var data = Request.RequestUri.ParseQueryString();
-	console.log(data);
+app.post('/emails/compose/:emailFrom/:emailTo', (request, response) => {  
+	var params1 = request.params.emailFrom;
+	
+	console.log(params1);
 
 	
-	response.json();
+	response.end();
   
 })
 //==================================================================
@@ -89,12 +84,10 @@ app.delete('/emails/:emailId', (request, response) => {
 	response.json(emails);
 });
 //==================================================================
-app.get('/product/:prdId', (request, response) => { 
-	const productId = +request.params.prdId;
-	console.log(`Server Requested to send Product with id: ${productId}`);
+app.post('/compose/:eFrom', (request, response) => { 
+	const emailFrom = +request.params.eFrom;
+	console.log(emailFrom);
 	
-	const idx = products.findIndex(product => product.id === productId);
-	response.json(product);
 	response.end();
 });
 

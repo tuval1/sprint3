@@ -28,9 +28,10 @@ function deleteEmail(id) {
 }
 
 function composeEmail(from, to, subject, msg) {
+  console.log('perform compose',from,to)
   $.ajax({
     type: "POST",
-    url: `${urlEmails}/compose`,
+    url: `${urlEmails}/compose/:${from}`,
     // data: {
     //   from: from,
     //   to: to,

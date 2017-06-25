@@ -1,7 +1,7 @@
 <template>
     <div class="message">
         <div class="header">
-            
+            <button @click.stop="">X</button>
             <ul>
             <li><span class="prop">From: </span>{{email.from}}</li>
             <li><span class="prop">To: </span>{{email.to}}</li>
@@ -29,25 +29,8 @@ export default {
       deleteEmail(){
         console.log('request delete');
         this.$emit('delete');
-      },    
-    requestNextBook() {
-      console.log('Requesting Next');
-      if (this.isModalMode) this.$emit('next');
-      else {
-        this.bookToShow = bookService.getNext(this.bookToShow)
-        this.$router.push(`/book/${this.bookToShow.id}`);
-      }
-    },
-    getBook(bookId) {
-      bookService.getBookById(bookId)
-        .then(book => {
-          this.bookToShow = book;
-          console.log(book)
-        })
-    },
-    foo() {
-      console.log('foo');
-    }
+      },         
+    
   }
 }
 </script>

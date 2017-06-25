@@ -1,6 +1,7 @@
 <template>
-  <section v-if="emails">
-    
+
+  <section v-if="emails">    
+    <email-filter @filter="emailFilter()"></email-filter>
     <h2>num of mails: {{emails.length}}</h2>    
     <button @click="isComposeMode=!isComposeMode">Compose mail</button>
     <table>
@@ -19,8 +20,10 @@
     <email-details v-if="selectedEmail" :email="selectedEmail">
     </email-details>
 
-    <email-compose v-if="isComposeMode">
+    <email-compose v-if="isComposeMode" :userEmail="userEmail">
     </email-compose>
+<button @click="emailToShow()">filter</button>
+    
   </section>
 </template>
 
@@ -29,6 +32,7 @@ import emailService from '../../services/emailService'
 import emailPreview from './emailPreview'
 import emailDetails from './emailDetails'
 import emailCompose from './emailCompose'
+import emailFilter from './emailFilter'
 export default {
   name: 'email-list',
   created() {    
@@ -38,13 +42,16 @@ export default {
   components: {
     emailPreview,
     emailDetails,
-    emailCompose
+    emailCompose,
+    emailFilter
   },  
   data() {
     return {
+      userEmail: 'owner@email.com',
       selectedEmail: null,
       emails: null,
-      isComposeMode: false
+      isComposeMode: false,
+      filter: null
     }
   },
   computed: {
@@ -61,31 +68,10 @@ export default {
       email.read = true;
       console.log('selected email:',this.selectedEmail);
     },
-    resetSelected() {
-      this.selectedBook = null;
-    },
-    selectNext() {
-      this.selectedBook = bookService.getNext(this.selectedBook);
-    },
-    editBook(book) {
-      console.log('Editing the book', book)
-      this.editedBook = book;
-    },
-    deleteBook(book) {
-      bookService.deleteBook(book);
-    },
-    saveBook(book) {
-      bookService.saveBook(book);
-      this.editedBook = null;
-      this.isCreateMode = false;
-    },
-    setFilter(newFilter) {
-      console.log('newFilter', newFilter);
-      this.bookFilter = newFilter;
-    },
-    addToCart(book) {
-      cartService.addToCart(book);
+    emailFilter(){
+      console.log('Executing Filter');
     }
+    
   }
 }
 </script>

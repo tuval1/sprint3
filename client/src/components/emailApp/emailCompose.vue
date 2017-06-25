@@ -1,7 +1,7 @@
 <template>
 <section class="modal new-email">     
     <h3>Create New Email</h3>       
-            <input type="text" value="somebody@email.com" v-model="emailFrom" disabled/>
+            <input type="text" v-model="userEmail" disabled/>
             <input type="text" placeholder="to" autofocus v-model="emailTo"/>
             <input type="text" placeholder="subject" v-model="emailSubject"/>                 
             <textarea v-model="emailMessage" placeholder=""></textarea>
@@ -15,7 +15,7 @@ export default {
     created(){
         
     },
-    props: [''],
+    props: ['userEmail'],
     data(){
         return {
             emailFrom: '',

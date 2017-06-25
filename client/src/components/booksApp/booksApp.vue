@@ -21,7 +21,7 @@
 
     },
     data(){
-            isCreateMode: false
+      return {isCreateMode: false}
     },
     methods: {
       

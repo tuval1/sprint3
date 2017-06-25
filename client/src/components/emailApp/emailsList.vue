@@ -2,13 +2,15 @@
   <section v-if="emails">
     <button @click="getEmails">Next > </button>
     <h2>num of mails: {{emails.length}}</h2>    
+    <button @click="isComposeMode=!isComposeMode">Compose mail</button>
     <table>
 
       <tr>
-      <th>Subject</th>
-      <th>Form</th>
-      <th>Date</th>
+      <th>id</th>
+      <th>sbj</th>
+      <th>to</th>
       <th>read</th>
+      <th>message</th>
         </tr>
       <email-preview v-for="email in emailsToShow" @click.native="selectEmail(email)"
 
@@ -21,6 +23,9 @@
 
     <email-details v-if="selectedEmail" :email="selectedEmail">
     </email-details>
+
+    <email-compose v-if="isComposeMode">
+    </email-compose>
   </section>
 </template>
 
@@ -28,6 +33,7 @@
 import emailService from '../../services/emailService'
 import emailPreview from './emailPreview'
 import emailDetails from './emailDetails'
+import emailCompose from './emailCompose'
 export default {
   name: 'email-list',
   created() {    
@@ -36,13 +42,14 @@ export default {
   },
   components: {
     emailPreview,
-    emailDetails
-  },
+    emailDetails,
+    emailCompose
+  },  
   data() {
     return {
-      selectedEmail: null,
       emails: null,
-      selectedEmail: null
+      selectedEmail: null,
+      isComposeMode: false
     }
   },
   computed: {
@@ -91,5 +98,14 @@ export default {
 </script>
 
 <style scoped>
+table{
+  border:1px solid blue;
+}
+tr{
+  border:1px solid red;
+}
+email-details{
+  border:1px solid green;
+}
 
 </style>

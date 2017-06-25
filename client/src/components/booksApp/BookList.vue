@@ -2,7 +2,7 @@
     <section v-if="books">
         <book-filter @set-filter="setFilter"></book-filter>
         <h2>We have {{books.length}} Books</h2>
-        <button @click="booksApp.isCreateMode=true">+</button>
+        <button @click="isCreateMode=true">+</button>
         <ul>
             <book-preview v-for="currBook in booksToShow" :key="currBook.id" @click.native="selectBook(currBook)" @edit="editBook(currBook)" @delete="deleteBook(currBook)" @add-to-cart="addToCart(currBook)" :book="currBook">
             </book-preview>
@@ -10,7 +10,7 @@
         <book-details v-if="selectedBook" @close="resetSelected" @next="selectNext" :book="selectedBook">
         </book-details>
     
-        <book-edit v-if="editedBook || booksApp.isCreateMode" :book="editedBook" @save="saveBook">
+        <book-edit v-if="editedBook || isCreateMode" :book="editedBook" @save="saveBook">
         </book-edit>
         
     
@@ -19,6 +19,7 @@
 
 <script>
 import BookFilter from './BookFilter';
+import booksApp from './booksApp';
 import BookEdit from './BookEdit';
 import BookDetails from './BookDetails';
 import BookPreview from './BookPreview';
@@ -44,7 +45,7 @@ export default {
             books: null,
             selectedBook: null,
             editedBook: null,
-           // isCreateMode: false,
+           isCreateMode: false,
             bookFilter: null
         }
     },

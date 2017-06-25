@@ -1,11 +1,11 @@
 <template>
     <tr>        
+        <td>{{email.id}}</td>
         <td>{{email.subject}}</td>
         <td>{{email.from}}</td> 
-
         <td>{{email.date}}</td>
         <td>{{email.read}}</td>
-
+        <td>{{email.msg}}</td> 
 
     </tr>
 </template>

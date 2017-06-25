@@ -13,7 +13,13 @@ const port = 3000
 const emails =  [
 	{id:1, from:'yos111@vs.com',to:'yos1@ggv.com',subject:'hy',msg:'how are you?',read: false},
 	{id:3, from:'yos33@vs.com',to:'yos3@ggv.com',subject:'hy',msg:'how are you?',read: false},
-	{id:2, from:'yos1111@vs.com',to:'yos@ggv.com',subject:'re: hy',msg:'fine thanks',read: false}
+	{id:2, from:'yos1111@vs.com',to:'yos@ggv.com',subject:'re: hy',msg:'fine thanks',read: false},
+	{id:4, from:'yos111@vs.com',to:'yos1@ggv.com',subject:'hy',msg:'how are you?',read: false},
+	{id:5, from:'yos33@vs.com',to:'yos3@ggv.com',subject:'hy',msg:'how are you?',read: false},
+	{id:6, from:'yos1111@vs.com',to:'yos@ggv.com',subject:'re: hy',msg:'fine thanks',read: false},
+	{id:7, from:'yos111@vs.com',to:'yos1@ggv.com',subject:'hy',msg:'how are you?',read: false},
+	{id:8, from:'yos33@vs.com',to:'yos3@ggv.com',subject:'hy',msg:'how are you?',read: false},
+	{id:9, from:'yos1111@vs.com',to:'yos@ggv.com',subject:'re: hy',msg:'fine thanks',read: false}
 							];
 
 
@@ -55,36 +61,26 @@ app.post('/user/:param', (request, response) => {
 
 })
 //==================================================================
-app.post('/update/:item', (request, response) => {  
-	var params1 = request.params.item;
-	var params = JSON.parse(params1);
-	const productId = params.id;
+app.post('/emails/compose', (request, response) => {  
+	//var params1 = request.params.item;
+	  var data = Request.RequestUri.ParseQueryString();
+	console.log(data);
+
 	
-	const idx = products.findIndex(product => product.id === productId);
-	products[idx] = params;
-	console.log(`updating Product with id: ${productId}`);
-	
-	response.json(products[idx]);
+	response.json();
   
 })
 //==================================================================
-app.post('/newProduct', (request, response) => {  
-	
-	var newProduct = request.body;
-	newProduct.id = products.length+1;
-	console.log(`New Product with id ${newProduct.id} Added`);
-	products.push(newProduct);
-	response.json(newProduct);
-  
-})
+
 //==================================================================
-app.delete('/product/:prdId', (request, response) => { 
-	const productId = +request.params.prdId;
-	console.log(`Server Requested to delete Product with id: ${productId}`);
+app.delete('/emails/:emailId', (request, response) => { 
+	const emailId = +request.params.prdId;
+	console.log(`Server Requested to delete email with id: ${emailId}`);
 	
-	const idx = products.findIndex(product => product.id === productId);
-	products.splice(idx, 1);
-	response.end();
+	const idx = emails.findIndex(email => email.id === emailId);
+	emails.splice(idx, 1);
+	
+	response.json(emails);
 });
 //==================================================================
 app.get('/product/:prdId', (request, response) => { 
@@ -106,26 +102,5 @@ app.listen(port, (err) => {
 })
 //==================================================================
 
-
-function generateProducts() {
-  //const skills = ['JavaScript', 'CSS', 'SASS', 'Node', 'Angular 2', 'VUE'];
-  const productsArr = [
-				{id:1, title:'JavaScript',description: 'lorem  ipsum dkhd daklhd dakhdk dakhdk ',price:13},
-  			{id:2, title:'css',description: 'lorem  bla bla bla ',price:33}
-					];
-
-  //return skills.map(generateProduct);
-  return productsArr;
-}
-//==================================================================
-function generateProduct(skill, i) {
-  return {
-    id: i + 1,
-    title: `Mastering ${skill}`,
-    description: `${skill} lorem  ipsum dkhd daklhd dakhdk dakhdk da`,
-    price: (i + 1) * 10
-  }
-}
-//==================================================================
 
 

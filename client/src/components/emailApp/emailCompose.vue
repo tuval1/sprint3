@@ -27,13 +27,14 @@ export default {
     },
     methods: {
         sendEmail(){
-            const emailFrom    = this.emailFrom;
+            const emailFrom    = this.userEmail;
             const emailTo      = this.emailTo;
             const emailSubject = this.emailSubject;
             const emailMessage = this.emailMessage;
             const sendDate     = Date.now();
             
-            console.log(emailFrom,emailTo,emailSubject,emailMessage,sendDate);
+            this.$emit('compose',emailFrom,emailTo,emailSubject,emailMessage,sendDate);
+            console.log('request compose',emailFrom,emailTo);
         }
     }
 }

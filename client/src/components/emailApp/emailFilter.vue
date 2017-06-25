@@ -2,6 +2,7 @@
 <section>     
     <h3>Filter</h3>
     <input type="text" v-model="filter">
+    
         </section>  
 </template>
 
@@ -10,21 +11,24 @@ export default {
   name: 'email-filter',
   data() {
       return {
-        filter: null
+        filter: ''
       }
     
   },
   watch: {
       filter: function(){
           console.log('filter watch');
-          this.emailFilter();
+          this.emailFilter(this.filter);
       }
   },
   methods: {
-      emailFilter(){
-          this.$emit('filter');
-          console.log('request filter');
+      emailFilter(event){
+          this.$emit('filter',this.filter);
+          console.log('request filter',this.filter);
       }
+  },
+  foo(){
+      this.$emit('foo');
   }
 }
 </script>
